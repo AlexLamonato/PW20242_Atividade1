@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% set titulo = "Cadastro de Produto" %}
+{% block conteudo %}
+<h2>{{ titulo }}</h2>
+<form method="post" action="/post_cadastro">
+    <div class="mb-3 form-floating">
+        <input class="form-control" type="text" name="nome" id="nome" placeholder=" " required>
+        <label class="form-label" for="nome">Nome do Produto</label>
+    </div>
+    <div class="mb-3 form-floating">
+        <textarea class="form-control" id="descricao" name="descricao" rows="3"  required></textarea>
+        <label class="form-label" for="descricao">Descriçâo</label>
+    </div>
+    <div class="mb-3 form-floating">
+        <input class="form-control" type="number" name="estoque" id="estoque" placeholder=" ">
+        <label class="form-label" for="estoque">Estoque</label>
+    </div>
+    <div class="mb-3 form-floating">
+        <input class="form-control" step="0.01" type="text" name="preco" id="preco" placeholder=" " required>
+        <label class="form-label" for="preco">Preço</label>
+    </div>
+    <div class="mb-3 form-floating"></div>
+        <select name="categoria" id="categoria" class="form-select" required>
+            <option value="Alimentos">Alimentos</option>  
+            <option value="Limpeza">Limpeza</option>
+            <option value="Eletrônicos">Eletrônicos</option>
+            <option value="Brinquedos">Brinquedos</option>  
+            <option value="Vestuário">Vestuário</option>
+            <option value="Automotivo">Automotivo</option>
+            <option value="Esporte&Lazer">Esporte & Lazer</option>
+        </select>
+        <label for="categoria" class="form-label">Categoria</label>
+    </div>
+    <div class="mb-3">
+        <button class="btn btn-dark btn-lg" type="submit">Cadastrar</button>
+    </div>
+</form>
+{% endblock %}
