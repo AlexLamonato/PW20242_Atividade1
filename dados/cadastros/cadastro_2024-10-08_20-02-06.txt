@@ -1,5 +1,0 @@
-Nome: Alex
-descricao: sopa 
- estoque: 10 
- preco: 10.0 
- categoria: Alimentos

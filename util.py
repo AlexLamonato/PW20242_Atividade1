@@ -1,4 +1,5 @@
 from datetime import datetime
+import sqlite3
 
 NOME_PASTA_HTML="html/"
 NOME_PASTA_CONTATOS="dados/contatos/"
@@ -16,3 +17,6 @@ def salvar_cadastro(nome, descricao, estoque, preco, categoria):
     conteudo = f"Nome: {nome}\ndescricao: {descricao} \n estoque: {estoque} \n preco: {preco} \n categoria: {categoria}"
     with open(nome_arquivo, "w") as arquivo:
         arquivo.write(conteudo)
+
+def obter_conexao():
+    return sqlite3.connect('dados.db')
