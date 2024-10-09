@@ -1,3 +1,4 @@
+from models.produto_model import Produto
 from util import obter_conexao
 from sql.produto_sql import SQL_CRIAR_TABELA, SQL_OBTER_TODOS, SQL_INSERIR
 # from produto_model import Produto

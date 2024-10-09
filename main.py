@@ -2,10 +2,13 @@ from fastapi import FastAPI, Form, Request
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
 import uvicorn
-from util import salvar_cadastro
+from repositories.produto_repo import inserir, criar_tabela  # Importa o repositório de produto
+from models.produto_model import Produto  # Importa o modelo Produto
 
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
+criar_tabela()
+
 
 @app.get("/")
 async def get_root(request: Request):
@@ -19,7 +22,7 @@ async def cadastro(request: Request):
 async def postar_cadastro(request: Request,
     nome: str = Form(...), 
     descricao: str = Form(...),
-    estoque: str = Form(...),
+    estoque: int = Form(...),
     preco: str = Form(...), 
     categoria: str = Form(...)):
     
@@ -29,7 +32,13 @@ async def postar_cadastro(request: Request,
         # Preço inválido, redireciona de volta para a página de cadastro
         return RedirectResponse("/cadastro", 303)
 
-    salvar_cadastro(nome, descricao, estoque, preco_float, categoria)
+    # Cria o objeto Produto usando a classe dataclass e os dados do formulário
+    produto = Produto(nome=nome, descricao=descricao, estoque=estoque, preco=preco_float, categoria=categoria)
+    
+    # Chama o método inserir do repositório para salvar o produto
+    inserir(produto)
+    
+    # Redireciona para a página de confirmação de cadastro recebido
     return RedirectResponse("/cadastro_recebido", 303)
 
 @app.get("/cadastro_recebido")
